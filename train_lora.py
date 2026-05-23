@@ -25,7 +25,6 @@ from diffusers.optimization import get_scheduler
 from transformers import CLIPTextModel, CLIPTokenizer
 
 from peft import LoraConfig, get_peft_model
-#from peft import LoraConfig, get_peft_model, get_peft_model_state_dict
 
 from peft.utils import get_peft_model_state_dict
 from diffusers.utils import convert_state_dict_to_diffusers
@@ -248,35 +247,6 @@ def main():
     accel.end_training()
 
 
-#def save_lora(unet_peft, save_dir: Path):
-#    """diffusers が読める形式で LoRA 重みだけ保存"""
-#    save_dir.mkdir(parents=True, exist_ok=True)
-#    state_dict = peft_state_dict(unet_peft)
-#    # diffusers の load_lora_weights が読めるキー名に変換
-#    state_dict = {f"unet.{k}": v for k, v in state_dict.items()}
-#    StableDiffusionPipeline.save_lora_weights(
-#        save_directory=str(save_dir),
-#        unet_lora_layers=state_dict,
-#        safe_serialization=True,
-#    )
-#    print(f"saved LoRA to {save_dir}")
-#
-
-#from peft.utils import get_peft_model_state_dict
-#from diffusers.utils import convert_state_dict_to_diffusers
-
-#def save_lora(unet_peft, save_dir: Path):
-#    save_dir.mkdir(parents=True, exist_ok=True)
-#    raw_state = get_peft_model_state_dict(unet_peft)
-#    unet_lora_state_dict = convert_state_dict_to_diffusers(raw_state)
-#    StableDiffusionPipeline.save_lora_weights(
-#        save_directory=str(save_dir),
-#        unet_lora_layers=unet_lora_state_dict,
-#        safe_serialization=True,
-#    )
-#    print(f"saved LoRA to {save_dir}")
-
-
 def save_lora(unet_peft, save_dir: Path):
     """diffusers が読める形式で LoRA 重みだけ保存"""
     save_dir.mkdir(parents=True, exist_ok=True)
@@ -312,8 +282,6 @@ def save_lora(unet_peft, save_dir: Path):
     print(f"saved LoRA to {save_dir}")
 
 
-
-
-
 if __name__ == "__main__":
     main()
+
